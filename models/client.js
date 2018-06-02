@@ -32,7 +32,7 @@ class Client {
 
 	static find(id, cb){
 		connection.query('SELECT * FROM clients WHERE id=? LIMIT 1', [id], (err,rows)=>{
-			if(err) throw err
+			if(err) throw err;
 			cb(new Client(rows[0]))
 		})
 	}

@@ -36,7 +36,7 @@ class Stock{
 
 	static find(id, cb){
 		connection.query('SELECT * FROM stock WHERE ref=? LIMIT 1', [ref], (err,rows)=>{
-			if(err) throw err
+			if(err) throw err;
 			cb(new Stock(rows[0]))
 		})
 	}
