@@ -1,0 +1,27 @@
+<% include header %>
+
+<table class="ui sortable celled table">
+  <thead>
+    <tr>
+      <th class="">Table n°</th>
+      <th class="">Taille</th>
+      <th class="">Disponible</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% for(table of tables) { %>
+  	<tr>
+  		<td><%= table.numero %></td>
+  		<td><%= table.taille %></td>
+  		<% if(table.prise == 0){%>
+  		<td class="positive">Oui</td>
+  		<% } else { %>
+  		<td class="negative">Non, réservée pour <%= table.client %></td>
+  		<% } %>
+  	</tr>
+  	<% } %>
+    
+  </tbody> 
+</table>
+
+<% include footer %>

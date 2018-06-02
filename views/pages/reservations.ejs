@@ -1,0 +1,28 @@
+<% include header %>
+
+<form action="/reservations" method="post" class="ui form">
+	<div class="field">
+		<label for="id">Numéro de réservation :</label>
+		<input name="id" id="id" value="<%= nbreserv %>" readonly>
+
+		<label for="numtable">Table :</label>
+		<select name="numtable">		
+			<% for(table of tables) { %>
+			<option value="<%= table.numero %>"><%= table.numero %></option>}
+			<% } %>
+		</select>
+
+		<label for="client">Nom du client :</label>
+		<select name="client">		
+			<% for(client of clients) { %>
+			<option value="<%= client.nom %>"><%= client.nom %></option>}
+			<% } %>
+		</select>
+
+	</div>
+	<button type="submit" class="ui blue labeled submit icon button">
+	<i class="icon edit"></i>Envoyer
+	</button>
+</form>
+
+<% include footer %>

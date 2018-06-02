@@ -1,0 +1,42 @@
+<% include header %>
+
+<form action="/stock" method="post" class="ui form">
+	<div class="field">
+		<label for="nom">Nom du produit :</label>
+		<input name="nom" id="nom" required>
+		<label for="quantite">Quantité en stock :</label>
+		<input name="quantite" id="quantite" required>
+		<label for="ref">Code de référence :</label>
+		<input name="ref" id="ref" required>
+	</div>
+	<button type="submit" class="ui blue labeled submit icon button">
+	<i class="icon edit"></i>Envoyer
+	</button>
+</form>
+
+
+<table class="ui sortable celled table">
+  <thead>
+    <tr>
+      <th class="">Référence produit</th>
+      <th class="">Nom du produit</th>
+      <th class="">Quantité disponible</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% for(p of stock) { %>
+  	<tr>
+  		<td><%= p.ref %></td>
+  		<td><%= p.nom %></td>
+  		<% if(p.quantite > 0){%>
+  		<td class="positive"><%= p.quantite %></td>
+  		<% } else { %>
+  		<td class="negative">0</td>
+  		<% } %>
+  	</tr>
+  	<% } %>
+    
+  </tbody> 
+</table>
+
+<% include footer %>

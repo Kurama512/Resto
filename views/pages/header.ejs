@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="/assets/semantic/semantic.min.css">
+	<style>
+		.main.container{
+			margin-top: 7em;
+		}
+
+		body {
+			background-image : url(/assets/img/fond.jpg);
+		}
+		.ui.form .field > label{
+			color:white;
+		}
+	</style>
+</head>
+<body>
+
+
+
+	<div class="ui fixed inverted menu">
+		<a href="/" class="header item">Le Grand Restaurant</a>
+		<a href="/tables" class="header item">Tables</a>
+		<a href="/clients" class="header item">Clients</a>
+		<a href="/reservations" class="header item">Réservations</a>
+		<a href="/stock" class="header item">Stock</a>
+	</div>
+	<div class="ui main container">
+		<% if (locals.flash && locals.flash.error) { %>
+		<div class="ui negative message">
+			<%= flash.error %>
+		</div>
+		<% }%>
+		<% if (locals.flash && locals.flash.success) { %>
+		<div class="ui positive message">
+			<%= flash.success %>
+		</div>
+		<% }%>

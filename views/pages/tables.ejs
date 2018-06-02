@@ -1,0 +1,23 @@
+<% include header %>
+
+<form action="/tables" method="post" class="ui form">
+	<div class="field">
+		<label for="taille">Taille de la table :</label>
+		<select name="taille" id="taille" required>
+			<option value="2">2</option>
+			<option value="4">4</option>
+			<option value="8">8</option>
+		</select>	
+		<label for="numero">Numéro de table :</label>
+		<input name="numero" id="numero" required>
+		<label for="posx">Coordonnée horizontale de la table :</label>
+		<input name="posx" id="posx" required>
+		<label for="posy">Coordonnée verticale de la table :</label>
+		<input name="posy" id="posy" required>
+	</div>
+	<button type="submit" class="ui blue labeled submit icon button">
+	<i class="icon edit"></i>Envoyer
+	</button>
+</form>
+
+<% include footer %>
