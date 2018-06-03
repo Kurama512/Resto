@@ -52,6 +52,13 @@ class Table {
 		})
 	}
 
+	static count(cb){
+		connection.query('SELECT COUNT(*) as nbretab FROM tables', (err,rows)=>{
+			if(err)throw err;
+			cb(new Table(rows[0]))
+		})
+	}
+
 	static find(id, cb){
 		connection.query('SELECT * FROM tables WHERE numero=? LIMIT 1', [numero], (err,rows)=>{
 			if(err) throw err;

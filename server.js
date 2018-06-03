@@ -34,7 +34,10 @@ app.get('/', (req, res)=>{
 ///////////////////LES TABLES////////////////////////////////////////////
 
 app.get('/tables', (req,res)=>{
-	res.render('pages/tables',{})
+	let Table = require('./models/table')
+	Table.count(function(nbretab){
+	res.render('pages/tables',{nbretab: nbretab.row.nbretab+1})
+	})
 })
 
 app.post('/tables', (req, res)=>{
@@ -88,7 +91,26 @@ app.get('/stock', (req,res)=>{
 	let Stock = require('./models/stock')
 	Stock.all(function(stock){
 		res.render('pages/stock',{
-			stock: stock
+			stock: stock,
+			ref: '',
+			nom: '',
+			quantite: '',
+			action: 'create' 
+		})
+	})
+})
+
+app.get('/stock/:id', (req,res)=>{
+	let Stock = require('./models/stock')
+	Stock.all(function(stock){
+	Stock.find(req.params.id, function(one){
+		res.render('pages/stock',{
+			stock: stock,
+			ref: one.row.ref,
+			nom: one.row.nom,
+			quantite: one.row.quantite,
+			action: 'update'
+			})
 		})
 	})
 })
@@ -99,12 +121,20 @@ app.post('/stock', (req, res)=>{
 		res.redirect('/stock')
 	} else {
 		let Stock = require('./models/stock')
-		Stock.create(req.body, function(){
-			req.flash('success', "Produit bien enregistré en base")
-			res.redirect('/stock')
-		})
+			if(req.body.action=='create'){
+			Stock.create(req.body, function(){
+				req.flash('success', "Produit bien enregistré en base")
+				res.redirect('/stock')
+				})
+			} else {
+			Stock.update(req.body, function(){
+				req.flash('success', "Produit bien mis à jour")
+				res.redirect('/stock')
+			})
+		} 
 	}
 })
+
 
 ////////////////////LES CLIENTS/////////////////////////////////////////
 

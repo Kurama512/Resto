@@ -1,6 +1,6 @@
 <% include header %>
 
-<table class="ui sortable celled table">
+<table class="ui unstackable selectable sortable celled table">
   <thead>
     <tr>
       <th class="">Table n°</th>
@@ -16,7 +16,7 @@
   		<% if(table.prise == 0){%>
   		<td class="positive">Oui</td>
   		<% } else { %>
-  		<td class="negative">Non, réservée pour <%= table.client %></td>
+  		<td class="negative">Non, réservée par <%= table.client %></td>
   		<% } %>
   	</tr>
   	<% } %>

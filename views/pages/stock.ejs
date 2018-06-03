@@ -2,12 +2,13 @@
 
 <form action="/stock" method="post" class="ui form">
 	<div class="field">
+    <input name="action" id="action" type="hidden" <%if(action=='update'){%>value="update"<% } else{ %> value="create" <% } %>>
 		<label for="nom">Nom du produit :</label>
-		<input name="nom" id="nom" required>
+		<input name="nom" id="nom" value="<%= nom %>" required>
 		<label for="quantite">Quantité en stock :</label>
-		<input name="quantite" id="quantite" required>
+		<input name="quantite" id="quantite" value="<%= quantite %>" required>
 		<label for="ref">Code de référence :</label>
-		<input name="ref" id="ref" required>
+		<input name="ref" id="ref" value="<%= ref %>" <%if(action=='update'){%>readonly<% } %> required>
 	</div>
 	<button type="submit" class="ui blue labeled submit icon button">
 	<i class="icon edit"></i>Envoyer
@@ -15,7 +16,7 @@
 </form>
 
 
-<table class="ui sortable celled table">
+<table class="ui selectable unstackable sortable celled table">
   <thead>
     <tr>
       <th class="">Référence produit</th>
@@ -26,12 +27,12 @@
   <tbody>
   	<% for(p of stock) { %>
   	<tr>
-  		<td><%= p.ref %></td>
-  		<td><%= p.nom %></td>
+  		<td class="selectable"><a href="/stock/<%= p.ref %>"><%= p.ref %></a></td>
+  		<td class="selectable"><a href="/stock/<%= p.ref %>"><%= p.nom %></a></td>
   		<% if(p.quantite > 0){%>
-  		<td class="positive"><%= p.quantite %></td>
+  		<td class="selectable positive"><a href="/stock/<%= p.ref %>"><%= p.quantite %></a></td>
   		<% } else { %>
-  		<td class="negative">0</td>
+  		<td class="selectable negative"><a href="/stock/<%= p.ref %>">0</a></td>
   		<% } %>
   	</tr>
   	<% } %>

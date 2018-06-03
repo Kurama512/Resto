@@ -27,6 +27,13 @@ class Stock{
 		})
 	}
 
+	static update(content, cb){
+		connection.query('UPDATE stock SET nom = ?, quantite = ? WHERE ref = ?',[content.nom,content.quantite,content.ref], (err, result)=>{
+			if(err) throw err;
+			cb(result)
+		})
+	}
+
 	static all(cb){
 		connection.query('SELECT * FROM stock', (err,rows)=>{
 			if(err)throw err;
@@ -35,7 +42,7 @@ class Stock{
 	}
 
 	static find(id, cb){
-		connection.query('SELECT * FROM stock WHERE ref=? LIMIT 1', [ref], (err,rows)=>{
+		connection.query('SELECT * FROM stock WHERE ref=? LIMIT 1', [id], (err,rows)=>{
 			if(err) throw err;
 			cb(new Stock(rows[0]))
 		})
